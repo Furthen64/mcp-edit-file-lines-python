@@ -2,6 +2,33 @@
 
 A TypeScript-based MCP server that provides tools for making precise line-based edits to text files within allowed directories.
 
+## Python Migration (In Progress)
+
+A parallel Python implementation now lives in the `python/` folder using `uv` for environment management.
+
+### Quick Start (Python)
+
+```bash
+cd python
+uv venv .venv
+uv pip install -e ".[dev]"
+.venv/bin/python -m pytest -q
+```
+
+### Run Python MCP Server
+
+```bash
+cd python
+.venv/bin/python -m mcp_edit_file_lines /absolute/allowed/dir
+```
+
+From repo root, you can also run:
+
+```bash
+npm run test:python
+npm run python:server -- /absolute/allowed/dir
+```
+
 ## Features
 
 ### Main Editing Tool

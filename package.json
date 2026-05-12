@@ -17,8 +17,12 @@
     "watch": "tsc --watch",
     "inspector": "npx @modelcontextprotocol/inspector build/index.js",
     "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js",
+    "test:python": "cd python && .venv/bin/python -m pytest -q",
     "test:tools": "tsx scripts/test-tools.ts",
+    "test:tools:python": "cd python && .venv/bin/python scripts/test_tools.py",
     "reset:fixtures": "tsx scripts/reset-fixtures.ts",
+    "reset:fixtures:python": "cd python && .venv/bin/python scripts/reset_fixtures.py",
+    "python:server": "cd python && .venv/bin/python -m mcp_edit_file_lines",
     "test:watch": "node --experimental-vm-modules node_modules/jest/bin/jest.js --watch",
     "format": "prettier --write \"src/**/*.{js,jsx,ts,tsx}\"",
     "format:check": "prettier --check \"src/**/*.{js,jsx,ts,tsx}\""
