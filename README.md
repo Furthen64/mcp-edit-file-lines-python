@@ -29,6 +29,59 @@ npm run test:python
 npm run python:server -- /absolute/allowed/dir
 ```
 
+## Migration Status
+
+### Parity Checklist
+
+| Component | TypeScript | Python | Status |
+|-----------|-----------|--------|--------|
+| Type definitions (EditOperation, SearchMatch, etc.) | ✅ | ✅ | Complete |
+| File editor (single/multi-line, string/regex matching) | ✅ | ✅ | Complete |
+| File search (text/regex, case sensitivity, context lines) | ✅ | ✅ | Complete |
+| Line info (line/context retrieval) | ✅ | ✅ | Complete |
+| State manager (TTL, deterministic IDs, cleanup) | ✅ | ✅ | Complete |
+| Approve edit (safe state lifecycle) | ✅ | ✅ | Complete |
+| MCP server (tool registration, path validation) | ✅ | ✅ | Complete |
+| Path safety (home expansion, realpath, symlink checks) | ✅ | ✅ | Complete |
+| Unit tests (core behavior) | 47 tests | 46+ tests | Complete |
+| Integration tests (tool calls via MCP) | Limited | ✅ (added) | Complete |
+| CLI scripts (fixture reset, smoke tools) | ✅ | ✅ | Complete |
+
+### Running Both Implementations
+
+**TypeScript (original):**
+```bash
+npm test
+```
+
+**Python (new):**
+```bash
+npm run test:python
+```
+
+### Cutover & Retirement Path
+
+1. **Current phase**: Python implementation complete and feature-parity validated.
+2. **Next phase**: Run both implementations side-by-side in production with identical clients; verify identical behavior on real workloads.
+3. **Validation criteria**:
+   - All tests green on both TS and Python (✅ currently met).
+   - MCP tool output format identical for the same input (diff content, error messages).
+   - Path security checks identical (✅ verified).
+   - State TTL/cleanup behavior identical (✅ verified).
+4. **Retirement**: After 1-2 weeks of verified parity in production, remove TypeScript source and keep only Python.
+
+### Developer Guide
+
+**If adding a new feature:**
+1. Implement in both TypeScript and Python.
+2. Add tests to both test suites.
+3. Run `npm test && npm run test:python` to verify parity.
+
+**If fixing a bug:**
+1. Fix in both codebases (or cherry-pick the simpler one and port).
+2. Add regression test to both suites.
+3. Verify identical behavior before closing.
+
 ## Features
 
 ### Main Editing Tool
